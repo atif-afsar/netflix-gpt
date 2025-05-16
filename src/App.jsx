@@ -1,12 +1,29 @@
-import React from 'react'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Body from './Components/Body';
+import Login from './Components/Login';
+import Browse from './Components/Browse';
+
+const appRouter = createBrowserRouter([
+  {
+    path: '/',
+    element: <Body />,  // Body will always be visible
+    children: [
+      {
+        path: '/',
+        element: <Login />
+      },
+      {
+        path: '/browse',
+        element: <Browse />
+      },
+    ]
+  }
+]);
 
 const App = () => {
   return (
-    <div>
-      <h1 className='bg-amber-500 text-2xl'>hello</h1>
-    </div>
-  )
-}
+    <RouterProvider router={appRouter} />
+  );
+};
 
-export default App
- 
+export default App;
