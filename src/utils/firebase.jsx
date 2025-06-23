@@ -1,6 +1,7 @@
 // firebase.js (or firebaseConfig.js)
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { getAuth } from "firebase/auth"
 
 // Your Firebase configuration
 const firebaseConfig = {
@@ -23,3 +24,5 @@ if (typeof window !== 'undefined') {
 }
 
 export { app, analytics };
+
+export const auth = getAuth();

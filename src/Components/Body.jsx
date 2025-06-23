@@ -1,9 +1,12 @@
-import { Outlet } from "react-router-dom";
+import { Outlet } from 'react-router-dom';
+import AuthListener from './AuthListener';
+
 const Body = () => {
   return (
     <div>
-     
-        <Outlet />
+      <AuthListener />
+      {/* Your outlet or children */}
+      <Outlet/>
     </div>
   );
 };

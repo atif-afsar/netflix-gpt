@@ -6,24 +6,22 @@ import Browse from './Components/Browse';
 const appRouter = createBrowserRouter([
   {
     path: '/',
-    element: <Body />,  // Body will always be visible
+    element: <Body />,
     children: [
       {
         path: '/',
-        element: <Login />
+        element: <Login />,
       },
       {
         path: '/browse',
-        element: <Browse />
+        element: <Browse />,
       },
-    ]
-  }
+    ],
+  },
 ]);
 
 const App = () => {
-  return (
-    <RouterProvider router={appRouter} />
-  );
+  return <RouterProvider router={appRouter} />;
 };
 
 export default App;

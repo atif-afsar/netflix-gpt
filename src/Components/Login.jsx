@@ -1,6 +1,14 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Header from "./Header";
 import { checkValidation } from "../utils/validate";
+import { auth } from "../utils/firebase";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { AVATAR, BGIMAGE } from "../utils/Constants";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -11,20 +19,77 @@ const Login = () => {
   const email = useRef(null);
   const password = useRef(null);
 
+  const navigate = useNavigate();
+
+  // Reset input values on mount
+  useEffect(() => {
+    if (fullName.current) fullName.current.value = "";
+    if (email.current) email.current.value = "";
+    if (password.current) password.current.value = "";
+  }, []);
+
+  const friendlyErrorMessages = {
+    "auth/email-already-in-use": "Email is already registered.",
+    "auth/invalid-email": "Please enter a valid email address.",
+    "auth/wrong-password": "Incorrect password.",
+    "auth/user-not-found": "No user found with this email.",
+    "auth/weak-password": "Password should be at least 6 characters.",
+  };
+
   const handleButtonClick = () => {
-    const fullNameValue = fullName.current ? fullName.current.value : "";
+    const fullNameValue = fullName.current ? fullName.current.value.trim() : "";
     const emailValue = email.current.value.trim();
     const passwordValue = password.current.value.trim();
 
-    const message = checkValidation(emailValue, passwordValue, isSignIn ? "" : fullNameValue);
+    const message = checkValidation(
+      emailValue,
+      passwordValue,
+      isSignIn ? "" : fullNameValue
+    );
 
     if (message) {
       setError(message);
       setShake(true);
       setTimeout(() => setShake(false), 500);
+      return;
+    }
+
+    if (isSignIn) {
+      signInWithEmailAndPassword(auth, emailValue, passwordValue)
+        .then((userCredential) => {
+          console.log("User signed in:", userCredential.user);
+          navigate("/browse");
+        })
+        .catch((error) => {
+          const friendlyMessage =
+            friendlyErrorMessages[error.code] || error.message;
+          setError(friendlyMessage);
+          setShake(true);
+          setTimeout(() => setShake(false), 500);
+        });
     } else {
-      setError("");
-      console.log("Validation passed. Proceed with login...");
+      createUserWithEmailAndPassword(auth, emailValue, passwordValue)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          updateProfile(user, {
+            displayName: fullNameValue,
+            photoURL:
+              AVATAR,
+          })
+            .then(() => {
+              navigate("/browse");
+            })
+            .catch((error) => {
+              setError(error.message);
+            });
+        })
+        .catch((error) => {
+          const friendlyMessage =
+            friendlyErrorMessages[error.code] || error.message;
+          setError(friendlyMessage);
+          setShake(true);
+          setTimeout(() => setShake(false), 500);
+        });
     }
   };
 
@@ -37,7 +102,7 @@ const Login = () => {
     <div className="relative h-screen w-full">
       {/* Background Image */}
       <img
-        src="https://assets.nflxext.com/ffe/siteui/vlv3/202ac35e-1fca-44f0-98d9-ea7e8211a07c/web/IN-en-20250512-TRIFECTA-perspective_688b8c03-78cb-46a6-ac1c-1035536f871a_small.jpg"
+        src={BGIMAGE}
         alt="bg-image"
         className="h-full w-full object-cover"
       />
@@ -52,8 +117,11 @@ const Login = () => {
 
       {/* Centered Form */}
       <form
+        autoComplete="off"
         onSubmit={(e) => e.preventDefault()}
-        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black bg-opacity-80 p-6 sm:p-8 md:p-12 rounded-md w-[90%] sm:w-[400px] flex flex-col gap-4 z-10 text-white transition-all duration-300 ${shake ? "animate-shake" : ""}`}
+        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black bg-opacity-80 p-6 sm:p-8 md:p-12 rounded-md w-[90%] sm:w-[400px] flex flex-col gap-4 z-10 text-white transition-all duration-300 ${
+          shake ? "animate-shake" : ""
+        }`}
       >
         <h1 className="text-2xl sm:text-3xl font-bold">
           {isSignIn ? "Sign In" : "Sign Up"}
@@ -61,8 +129,9 @@ const Login = () => {
 
         {!isSignIn && (
           <input
-          ref={fullName}
+            ref={fullName}
             type="text"
+            autoComplete="off"
             placeholder="Full Name"
             className="p-3 rounded bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-red-600"
           />
@@ -71,6 +140,7 @@ const Login = () => {
         <input
           ref={email}
           type="text"
+          autoComplete="off"
           placeholder="Email Id"
           className={`p-3 rounded bg-neutral-800 focus:outline-none focus:ring-2 ${
             error?.toLowerCase().includes("email")
@@ -82,6 +152,7 @@ const Login = () => {
         <input
           ref={password}
           type="password"
+          autoComplete="new-password"
           placeholder="Password"
           className={`p-3 rounded bg-neutral-800 focus:outline-none focus:ring-2 ${
             error?.toLowerCase().includes("password")
