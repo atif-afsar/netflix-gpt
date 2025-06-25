@@ -9,7 +9,7 @@ const useNowPlayingMovies = () => {
 
   const fetchMovies = async () => {
     try {
-      const keywords = ["Life", "Inception", "Lion King", "Avatar", "Fall", "Mugen Train", "Promare", "Spirited Away", "Your Name", "Inu-Oh"]
+      const keywords =  ["Avatar", "Transformers",  "Fall", "Inception", "John Wick",  "Avengers", "Star Wars", "Hobbit", "Inu-Oh", "One Piece", "Lion King"]
 
 
       // Fetch search results in parallel

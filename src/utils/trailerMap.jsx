@@ -1,21 +1,48 @@
 // utils/trailerMap.js
 
 const trailerMap = {
-  // Live-action + animated visually impressive
-  "Life of Pi": "9A0p_SJ8eu4",                // Official Trailer 1 :contentReference[oaicite:1]{index=1}
-  "Inception": "YoHD9XEInc0",                // Official Trailer #1 :contentReference[oaicite:2]{index=2}
-  "The Lion King": "7TavVZMewpY",            // CGI remake
-  "The Avengers": "eOrNdBpGMv8",             // Epic superhero ensemble
+  // Avatar Franchise
+  "Avatar": "5PSNL1qE6VY",                        // Avatar (2009)
+  "Avatar: The Way of Water": "d9MyW72ELq0",      // Avatar 2 (2022)
 
-  // Anime visually masterpieces
-  "Demon Slayer: Mugen Train": "pgwoErazsYo",// English dubbed trailer :contentReference[oaicite:3]{index=3}
-  "Promare": "B8-B8he8HIQ",                  // Official trailer :contentReference[oaicite:4]{index=4}
-  "Spirited Away": "ByXuk9QqQkk",            // Studio Ghibli classic
-  "Your Name": "hRfHcp2GjVI",                // Makoto Shinkai’s hit
+  // Transformers Franchise
+  "Transformers": "CbX_SIz_9fk",                  // Transformers (2007)
+  "Transformers: Rise of the Beasts": "itnqEauWQZM",
+  "Transformers One": "5a09yJU-mCI",
 
-  // Bonus visually striking titles
-  "Avatar": "5PSNL1qE6VY",                    // (Add if needed)
-  "2001: A Space Odyssey": "zfM0wHsweWY"     // (Add if needed)
+  // Fall (2022)
+  "Fall": "aa5mxk9pAwk",                          // Official trailer
+
+  // Inception
+  "Inception": "YoHD9XEInc0",                     // Official trailer #1
+
+  // John Wick
+  "John Wick": "2AUmvWm5ZDQ",                     // John Wick (2014)
+  "John Wick: Chapter 4": "qEVUtrk8_B4",          // Chapter 4 (2023)
+
+  // Avengers Franchise
+  "Avengers": "eOrNdBpGMv8",                      // Avengers (2012)
+  "Avengers: Infinity War": "6ZfuNTqbHE8",
+  "Avengers: Endgame": "TcMBFSGVi1c",
+
+  // Star Wars
+  "Star Wars": "1g3_CFmnU7k",                     // Original Star Wars (1977)
+  "Star Wars: The Force Awakens": "sGbxmsDFVnE",
+
+  // The Hobbit
+  "Hobbit": "JTSoD4BBCJc",                        // An Unexpected Journey
+  "The Hobbit: Desolation of Smaug": "OPVWy1tFXuc",
+
+  // Inu-Oh
+  "Inu-Oh": "rL-Ke9oEp3U",                        // Official trailer
+
+  "One Piece": "Ades3pQbeh8", // Add this line
+"One Piece (Live Action)": "Ades3pQbeh8",
+"One Piece Film: Red": "89JWRYEIG-s",
+
+  // The Lion King
+  "The Lion King": "HQ8dwdXTIyo",                 // 1994 original
+  "The Lion King (2019)": "7TavVZMewpY",          // CGI remake
 };
 
 export default trailerMap;

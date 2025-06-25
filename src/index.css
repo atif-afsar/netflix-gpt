@@ -10,3 +10,17 @@
 .animate-shake {
   animation: shake 0.3s ease-in-out;
 }
+/* Hide scrollbars but allow scrolling */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;    /* Firefox */
+}
+html, body {
+   margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
