@@ -7,3 +7,9 @@ export const AVATAR = "https://wallpapers.com/images/hd/netflix-profile-pictures
 export const OMDB_API_KEY = "f10d002d";
 
 export const OMDB_BASE_URL = "https://www.omdbapi.com/";
+
+export const SUPPORTED_LANGUAGES = [
+  { identifier: "en", name: "English" },
+  {identifier: "hi", name: "Hindi" },
+  {identifier: "zh", name: "Chinese" }
+];
