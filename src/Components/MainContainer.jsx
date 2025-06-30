@@ -12,7 +12,7 @@ const MainContainer = () => {
   const { Title, Plot } = mainMovie; // OMDB has `Title`, not `original_title`
 
   return (
-    <div className="relative w-full h-screen">
+    <div className="relative w-full h-screen overflow-hidden">
       <VideoTitle title={Title} overview={Plot} />
       <VideoBackground title={Title} />
     </div>

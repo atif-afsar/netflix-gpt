@@ -4,7 +4,7 @@ export const BGIMAGE = "https://assets.nflxext.com/ffe/siteui/vlv3/202ac35e-1fca
 
 export const AVATAR = "https://wallpapers.com/images/hd/netflix-profile-pictures-1000-x-1000-qo9h82134t9nv0j0.jpg"
 
-export const OMDB_API_KEY = "f10d002d";
+export const OMDB_API_KEY = import.meta.env.VITE_OMDB_KEY;
 
 export const OMDB_BASE_URL = "https://www.omdbapi.com/";
 
@@ -13,3 +13,6 @@ export const SUPPORTED_LANGUAGES = [
   {identifier: "hi", name: "Hindi" },
   {identifier: "zh", name: "Chinese" }
 ];
+
+// OpenAI Pro API Key for GPT movie recommendations
+export const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
